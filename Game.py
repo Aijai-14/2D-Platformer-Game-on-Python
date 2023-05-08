@@ -39,7 +39,7 @@ class Game:
 
         offset = 0
         for i in range(5):
-            self.levelSet.add(Text(f"Level {i + 1}", 30, (204, 255, 153), 75 + offset, 350))
+            self.levelSet.add(Text(f"Level {i + 1}", 30, (204, 255, 153), 100 + offset, 350))
             offset += 200
 
     def run(self):
@@ -63,8 +63,8 @@ class Game:
                         for i in range(len(self.levelSet.sprites())):
                             if self.levelSet.sprites()[i].rect.collidepoint(event.pos):
                                 self.state = f"in_level_{i + 1}"
-                                display.fill((204, 255, 255))
                                 self.currentLevel = Level(level_maps.get(i+1), display)
+                                #display.fill((204, 255, 255))
                                 break
 
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_q:
@@ -78,14 +78,13 @@ class Game:
                 start.draw(display)
 
             if self.state == "level_select":
-                display.blit(pygame.transform.flip(menuBackground, True, False), (0, 0))
+                display.blit(menuBackground, (0, 0))
                 gameTitle.draw(display)
                 back.draw(display)
                 self.levelSet.draw(display)
 
             if self.state[0:8] == "in_level":
                 self.currentLevel.generate()
-
 
             # loop continuously updates game screen to reflect current state
             pygame.display.update()
