@@ -1,0 +1,5 @@
+character: https://pixelboyz.itch.io/platform-character-warrior
+game assets: https://marwamj.itch.io/platform-2d-game-assets-environment
+
+
+Ninja: https://10kstudios.itch.io/free-2d-platforming-character
