@@ -19,6 +19,8 @@ class Level:
         # determines the number of pixels to scroll through when character moves through level
         self.levelShift = 0
 
+        self.collisionX = 0
+
     # This method creates the map of the level and adds the player to the level
     def setup(self, level_map):
         # create sprite groups for blocks and player
@@ -71,8 +73,17 @@ class Level:
                 # based on player direction align player with block against the direction of movement.
                 if player.dir.x < 0:
                     player.rect.left = block.rect.right
+                    player.onLeft = True
+                    self.collisionX = player.rect.left
                 elif player.dir.x > 0:
                     player.rect.right = block.rect.left
+                    player.onRight = True
+                    self.collisionX = player.rect.right
+
+        if player.onLeft and (player.dir.x >= 0 or player.rect.left < self.collisionX):
+            player.onLeft = False
+        if player.onRight and (player.dir.x <= 0 or player.rect.right > self.collisionX):
+            player.onRight = False
 
     # This method checks for vertical collisions between the player and blocks in the level.
     def verticalCollisions(self):
@@ -90,9 +101,17 @@ class Level:
                     player.rect.bottom = block.rect.top
                     player.dir.y = 0
                     player.isFalling = False
+                    player.onGround = True
                 elif player.dir.y < 0:
                     player.rect.top = block.rect.bottom
                     player.dir.y = 0
+                    player.onTop = True
+
+        if player.onGround and player.dir.y < 0 or player.dir.y > 1:
+            player.onGround = False
+
+        if player.onTop and player.dir.y > 0:
+            player.onTop = False
 
     # This method generates the level and displays it on the screen.
     def generate(self):

@@ -10,15 +10,9 @@ pygame.init()
 # initialize game clock to maintain frame rate
 clock = pygame.time.Clock()
 
-# Create game window with custom icon and title
-icon = pygame.image.load("Images/GameIcon.jpeg")
-pygame.display.set_icon(icon)
-display = pygame.display.set_mode((width, height))
-pygame.display.set_caption("My First 2D Platformer Game!")
-
 # Set the initial prompts for the game on the menu screen.
 gameTitle = pygame.sprite.GroupSingle()
-gameTitle.add(Text("Adventure Awaits", 50, (204, 255, 153), 225, 50))
+gameTitle.add(Text("Ninja Crawler", 50, (204, 255, 153), 225, 50))
 
 start = pygame.sprite.GroupSingle()
 start.add(Text("PLAY", 50, (204, 255, 153), 500, 350))
